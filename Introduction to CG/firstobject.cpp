@@ -14,10 +14,18 @@ int main(){
         {0, 8, 10},
     };
 
+    const unsigned int image_width = 512, image_height = 512;
+
     for (int i = 0; i < 8; ++i){
         float x_proj = corners[i][0] / corners[i][2]; // P'.x
         float y_proj = corners[i][1] / corners[i][2]; // P'.y
-        printf("Projected corner %d: x:%f, y:%f\n", i, x_proj, y_proj);
+
+        float x_proj_remap = (1 + x_proj) / 2;
+        float y_proj_remap = (1 + y_proj) / 2;
+        float x_proj_pix = x_proj_remap * image_width;
+        float y_proj_pix = y_proj_remap * image_height;
+
+        printf("Projected corner %d: x:%f, y:%f\n", i, x_proj_pix, y_proj_pix);
     }
 
     return 0;
